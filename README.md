@@ -5,4 +5,4 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
 
 # Install
-[![asciicast](https://asciinema.org/a/sMKU0AYt4osoqtj0G8eeIbMu5.png)](https://asciinema.org/a/sMKU0AYt4osoqtj0G8eeIbMu5)
+[![asciicast](https://asciinema.org/a/sMKU0AYt4osoqtj0G8eeIbMu5)](https://asciinema.org/a/sMKU0AYt4osoqtj0G8eeIbMu5)
