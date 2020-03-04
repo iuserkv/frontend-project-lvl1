@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 
-import { getUserName } from '../src/index.js';
+import brainCongratulation from '../src/games/game-congratulation.js';
 
-// Начало игры.
-console.log('Welcome to the Brain Games!');
+// --------------------------------------------------
+// Привествуем игрока
+// --------------------------------------------------
 
-// Запрашиваем имя игрока и выводим приветствие.
-const userName = getUserName();
-console.log(`Hello, ${userName}!`);
-
-export default userName;
+brainCongratulation();

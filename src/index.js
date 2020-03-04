@@ -7,7 +7,7 @@ const getUserName = () => readlineSync.question('May I have your name? ');
 const getRandomNumber = (maxNumber) => Math.round((Math.random() * maxNumber));
 
 // Проверяет input на соотвествие 'yes' или 'no'. Если input что-то иное, возвращает null.
-const checkInput = (input) => {
+const isInputYesNo = (input) => {
   const setAnswers = ['yes', 'no'];
 
   if (setAnswers.indexOf(input) !== -1) {
@@ -17,4 +17,18 @@ const checkInput = (input) => {
   return null;
 };
 
-export { getUserName, getRandomNumber, checkInput };
+// Если input нельзя привести к числу, возвращает null,
+// иначе возвращает число, соответствующее input.
+const strToInt = (input) => {
+  const inputNumber = parseInt(input, 10);
+
+  if (Number.isNaN(inputNumber)) {
+    return null;
+  }
+
+  return inputNumber;
+};
+
+export {
+  getUserName, getRandomNumber, isInputYesNo, strToInt,
+};
