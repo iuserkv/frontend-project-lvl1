@@ -6,35 +6,24 @@ import brainGreeting from './game-greeting.js';
 // Вспомогательные функции
 // --------------------------------------------------
 
-// Возвращает случайным образом одну из операция: +, -, *.
-const getRandomOperation = () => {
-  const setOperations = ['+', '-', '*'];
-  const randomOperation = setOperations[getRandomNumber(2)];
+// Возвращает наибольший общий делитель чисел number1 и number2.
+const getGcd = (number1, number2) => {
+  let num1 = number1;
+  let num2 = number2;
 
-  return randomOperation;
-};
-
-// Вычисляет заданное выражение и возвращет его результат.
-// number1, number2 - операнды; operation - операция.
-const calcExpression = (number1, number2, operation) => {
-  if (operation === '+') {
-    return number1 + number2;
+  while (num1 !== num2) {
+    if (num1 > num2) {
+      num1 -= num2;
+    } else {
+      num2 -= num1;
+    }
   }
 
-  if (operation === '-') {
-    return number1 - number2;
-  }
-
-  if (operation === '*') {
-    return number1 * number2;
-  }
-
-  return null;
+  return num1;
 };
 
 // Проверяет ответ пользователя.
-// Если вычисленное значение (number) и введенное пользователем (answer) совпадают,
-// возвращает true, иначе - false.
+// Если ответ верный, возвращает true, иначе false.
 const isCorrectAnswer = (number, answer) => {
   const userAnswer = strToInt(answer);
 
@@ -50,24 +39,24 @@ const isCorrectAnswer = (number, answer) => {
 };
 
 // --------------------------------------------------
-// Игра "Brain calc"
+// Игра "Brain gcd"
 // --------------------------------------------------
 
-const brainCalc = (maxRandomNumber) => {
+const brainGcd = (maxRandomNumber) => {
   // Приветствуем игрока.
   const userName = brainGreeting();
 
   // Начинаем игру.
-  console.log('What is the result of the expression?');
+  console.log('Find the greatest common divisor of given numbers.');
 
   // Даем игроку три попытки ответить.
   for (let i = 0; i < 3; i += 1) {
-    // Задаем выражение и предлагем его вычислить.
+    // Получаем два числа их наибольший общий делитель.
     const number1 = getRandomNumber(maxRandomNumber);
     const number2 = getRandomNumber(maxRandomNumber);
-    const operation = getRandomOperation();
-    const correctValue = calcExpression(number1, number2, operation);
-    console.log(`Question: ${number1} ${operation} ${number2}`);
+    const correctValue = getGcd(number1, number2);
+
+    console.log(`Question: ${number1} ${number2}`);
 
     // Запрашиваем отет игрока.
     const userAnswer = readlineSync.question('Your answer: ');
@@ -87,4 +76,4 @@ const brainCalc = (maxRandomNumber) => {
   console.log(`Congratulations, ${userName}!`);
 };
 
-export default brainCalc;
+export default brainGcd;

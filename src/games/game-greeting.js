@@ -4,7 +4,7 @@ import { getUserName } from '../index.js';
 // Привествие игры "Brain games"
 // --------------------------------------------------
 
-const brainCongratulation = () => {
+const brainGreeting = () => {
   // Привествествуем.
   console.log('Welcome to the Brain Games!');
 
@@ -15,4 +15,4 @@ const brainCongratulation = () => {
   return userName;
 };
 
-export default brainCongratulation;
+export default brainGreeting;

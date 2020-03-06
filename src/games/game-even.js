@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
 import { getRandomNumber, isInputYesNo } from '../index.js';
-import brainCongratulation from './game-congratulation.js';
+import brainGreeting from './game-greeting.js';
 
 // --------------------------------------------------
 // Вспомогательные функции
@@ -32,7 +32,7 @@ const isCorrectAnswer = (number, answer) => {
 
 const brainEven = (maxRandomNumber) => {
   // Приветствуем игрока.
-  const userName = brainCongratulation();
+  const userName = brainGreeting();
 
   // Начинаем игру.
   console.log('Answer "yes" if the number is even, otherwise answer "no".');

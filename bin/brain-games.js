@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import brainCongratulation from '../src/games/game-congratulation.js';
+import brainGreeting from '../src/games/game-greeting.js';
 
 // --------------------------------------------------
 // Привествуем игрока
 // --------------------------------------------------
 
-brainCongratulation();
+brainGreeting();
