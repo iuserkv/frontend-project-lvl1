@@ -2,4 +2,4 @@
 
 import gameBrain from '../src/games/game-brain.js';
 
-gameBrain('gcd'); // Запускаем игру "Brain gcd"
+gameBrain('prime'); // Запускаем игру "Brain prime"

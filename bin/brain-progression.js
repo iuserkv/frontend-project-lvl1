@@ -1,12 +1,5 @@
 #!/usr/bin/env node
 
-import brainProgression from '../src/games/game-progression.js';
+import gameBrain from '../src/games/game-brain.js';
 
-// --------------------------------------------------
-// Запускаем игру "Brain progression"
-// --------------------------------------------------
-
-// Максимальное число с которого может начинаться прогрессия.
-const maxRandomNumber = 100;
-
-brainProgression(maxRandomNumber);
+gameBrain('progression'); // Запускаем игру "Brain progression"

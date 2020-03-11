@@ -1,90 +1,42 @@
-import readlineSync from 'readline-sync';
-import { getRandomNumber, strToInt } from '../index.js';
-import brainGreeting from './game-greeting.js';
-
-// --------------------------------------------------
-// Вспомогательные функции
-// --------------------------------------------------
-
-// Возвращает случайным образом одну из операция: +, -, *.
-const getRandomOperation = () => {
-  const setOperations = ['+', '-', '*'];
-  const randomOperation = setOperations[getRandomNumber(2)];
-
-  return randomOperation;
-};
-
-// Вычисляет заданное выражение и возвращет его результат.
-// number1, number2 - операнды; operation - операция.
-const calcExpression = (number1, number2, operation) => {
-  if (operation === '+') {
-    return number1 + number2;
-  }
-
-  if (operation === '-') {
-    return number1 - number2;
-  }
-
-  if (operation === '*') {
-    return number1 * number2;
-  }
-
-  return null;
-};
-
-// Проверяет ответ пользователя.
-// Если вычисленное значение (number) и введенное пользователем (answer) совпадают,
-// возвращает true, иначе - false.
-const isCorrectAnswer = (number, answer) => {
-  const userAnswer = strToInt(answer);
-
-  if (userAnswer === null) {
-    return false;
-  }
-
-  if (number === userAnswer) {
-    return true;
-  }
-
-  return false;
-};
+import {
+  WIN_GAME, LOSE_GAME,
+  sendMessage, getAnswer, inputToInt, sendWrongMessage,
+  getRandomNumber, getRandomOperation, calcExpression,
+  isCorrectAnswer,
+} from '../index.js';
 
 // --------------------------------------------------
 // Игра "Brain calc"
 // --------------------------------------------------
 
-const brainCalc = (maxRandomNumber) => {
-  // Приветствуем игрока.
-  const userName = brainGreeting();
-
+const brainCalc = (userName, maxRandomNumber) => {
   // Начинаем игру.
-  console.log('What is the result of the expression?');
+  sendMessage('What is the result of the expression?');
 
   // Даем игроку три попытки ответить.
   for (let i = 0; i < 3; i += 1) {
-    // Задаем выражение и предлагем его вычислить.
+    // Задаем выражение.
     const number1 = getRandomNumber(maxRandomNumber);
     const number2 = getRandomNumber(maxRandomNumber);
     const operation = getRandomOperation();
-    const correctValue = calcExpression(number1, number2, operation);
-    console.log(`Question: ${number1} ${operation} ${number2}`);
+    sendMessage(`Question: ${number1} ${operation} ${number2}`);
 
-    // Запрашиваем отет игрока.
-    const userAnswer = readlineSync.question('Your answer: ');
+    // Запрашиваем ответ игрока.
+    const userAnswer = inputToInt(getAnswer());
+    const correctAnswer = calcExpression(number1, number2, operation);
 
     // Если ответ неверный, сообщаем об это и завершаем игру.
-    if (!isCorrectAnswer(correctValue, userAnswer)) {
-      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctValue}".\nLet's try again, ${userName}!`);
+    if (!isCorrectAnswer(correctAnswer, userAnswer)) {
+      sendWrongMessage(correctAnswer, userAnswer, userName);
 
-      return;
+      return LOSE_GAME;
     }
 
     // Если ответ верный, продолжаем.
-    console.log('Correct!');
+    sendMessage('Correct!');
   }
 
-  // Игрок победил.
-  console.log(`Congratulations, ${userName}!`);
+  return WIN_GAME;
 };
 
 export default brainCalc;

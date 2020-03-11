@@ -1,13 +1,5 @@
 #!/usr/bin/env node
 
-import brainCalc from '../src/games/game-calc.js';
+import gameBrain from '../src/games/game-brain.js';
 
-// --------------------------------------------------
-// Запускаем игру "Brain calc"
-// --------------------------------------------------
-
-// Максимальное гененрируемое случайное значение для операндов
-// в заданном выражении.
-const maxRandomNumber = 100;
-
-brainCalc(maxRandomNumber);
+gameBrain('calc'); // Запускаем игру "Brain calc"

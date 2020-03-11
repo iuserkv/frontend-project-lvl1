@@ -1,79 +1,41 @@
-import readlineSync from 'readline-sync';
-import { getRandomNumber, strToInt } from '../index.js';
-import brainGreeting from './game-greeting.js';
-
-// --------------------------------------------------
-// Вспомогательные функции
-// --------------------------------------------------
-
-// Возвращает наибольший общий делитель чисел number1 и number2.
-const getGcd = (number1, number2) => {
-  let num1 = number1;
-  let num2 = number2;
-
-  while (num1 !== num2) {
-    if (num1 > num2) {
-      num1 -= num2;
-    } else {
-      num2 -= num1;
-    }
-  }
-
-  return num1;
-};
-
-// Проверяет ответ пользователя.
-// Если ответ верный, возвращает true, иначе false.
-const isCorrectAnswer = (number, answer) => {
-  const userAnswer = strToInt(answer);
-
-  if (userAnswer === null) {
-    return false;
-  }
-
-  if (number === userAnswer) {
-    return true;
-  }
-
-  return false;
-};
+import {
+  WIN_GAME, LOSE_GAME,
+  sendMessage, getAnswer, inputToInt, sendWrongMessage,
+  getRandomNumber, getGcd,
+  isCorrectAnswer,
+} from '../index.js';
 
 // --------------------------------------------------
 // Игра "Brain gcd"
 // --------------------------------------------------
 
-const brainGcd = (maxRandomNumber) => {
-  // Приветствуем игрока.
-  const userName = brainGreeting();
-
+const brainGcd = (userName, maxRandomNumber) => {
   // Начинаем игру.
-  console.log('Find the greatest common divisor of given numbers.');
+  sendMessage('Find the greatest common divisor of given numbers.');
 
   // Даем игроку три попытки ответить.
   for (let i = 0; i < 3; i += 1) {
-    // Получаем два числа их наибольший общий делитель.
+    // Получаем два случайных числа.
     const number1 = getRandomNumber(maxRandomNumber);
     const number2 = getRandomNumber(maxRandomNumber);
-    const correctValue = getGcd(number1, number2);
-
-    console.log(`Question: ${number1} ${number2}`);
+    sendMessage(`Question: ${number1} ${number2}`);
 
     // Запрашиваем отет игрока.
-    const userAnswer = readlineSync.question('Your answer: ');
+    const userAnswer = inputToInt(getAnswer());
+    const correctAnswer = getGcd(number1, number2);
 
     // Если ответ неверный, сообщаем об это и завершаем игру.
-    if (!isCorrectAnswer(correctValue, userAnswer)) {
-      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctValue}".\nLet's try again, ${userName}!`);
+    if (!isCorrectAnswer(correctAnswer, userAnswer)) {
+      sendWrongMessage(correctAnswer, userAnswer, userName);
 
-      return;
+      return LOSE_GAME;
     }
 
     // Если ответ верный, продолжаем.
-    console.log('Correct!');
+    sendMessage('Correct!');
   }
 
-  // Игрок победил.
-  console.log(`Congratulations, ${userName}!`);
+  return WIN_GAME;
 };
 
 export default brainGcd;

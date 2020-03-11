@@ -1,44 +1,23 @@
-import readlineSync from 'readline-sync';
-import { getRandomNumber, strToInt } from '../index.js';
-import brainGreeting from './game-greeting.js';
-
-// --------------------------------------------------
-// Вспомогательные функции
-// --------------------------------------------------
-
-// Проверяет ответ пользователя.
-// Если ответ верный, возвращает true, иначе false.
-const isCorrectAnswer = (number, answer) => {
-  const userAnswer = strToInt(answer);
-
-  if (userAnswer === null) {
-    return false;
-  }
-
-  if (number === userAnswer) {
-    return true;
-  }
-
-  return false;
-};
+import {
+  WIN_GAME, LOSE_GAME,
+  sendMessage, getAnswer, inputToInt, sendWrongMessage,
+  getRandomNumber, isCorrectAnswer,
+} from '../index.js';
 
 // --------------------------------------------------
 // Игра "Brain progression"
 // --------------------------------------------------
 
-const brainProgression = (maxRandomNumber) => {
-  // Приветствуем игрока.
-  const userName = brainGreeting();
-
+const brainProgression = (userName, maxRandomNumber) => {
   // Начинаем игру.
-  console.log('What number is missing in the progression?');
+  sendMessage('What number is missing in the progression?');
 
   // Длина последовательности чисел.
   const sequenceLength = 10;
 
   // Даем игроку три попытки ответить.
   for (let i = 0; i < 3; i += 1) {
-    // Получаем последовательность чисел и случайный пропущенный элемент.
+    // Получаем последовательность чисел.
     let currentNumber = getRandomNumber(maxRandomNumber);
     const difSequence = getRandomNumber(maxRandomNumber);
     const sequence = [];
@@ -49,27 +28,26 @@ const brainProgression = (maxRandomNumber) => {
 
     // Выбираем случайное число последовательности,
     // которое должен вычислить игрок.
-    const randomIndex = getRandomNumber(sequenceLength);
-    const correctValue = sequence[randomIndex];
+    const randomIndex = getRandomNumber(sequenceLength - 1);
+    const correctAnswer = sequence[randomIndex];
     sequence[randomIndex] = '..';
-    console.log(`Question: ${sequence.join(' ')}`);
+    sendMessage(`Question: ${sequence.join(' ')}`);
 
     // Запрашиваем отет игрока.
-    const userAnswer = readlineSync.question('Your answer: ');
+    const userAnswer = inputToInt(getAnswer());
 
     // Если ответ неверный, сообщаем об это и завершаем игру.
-    if (!isCorrectAnswer(correctValue, userAnswer)) {
-      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctValue}".\nLet's try again, ${userName}!`);
+    if (!isCorrectAnswer(correctAnswer, userAnswer)) {
+      sendWrongMessage(correctAnswer, userAnswer, userName);
 
-      return;
+      return LOSE_GAME;
     }
 
     // Если ответ верный, продолжаем.
-    console.log('Correct!');
+    sendMessage('Correct!');
   }
 
-  // Игрок победил.
-  console.log(`Congratulations, ${userName}!`);
+  return WIN_GAME;
 };
 
 export default brainProgression;
