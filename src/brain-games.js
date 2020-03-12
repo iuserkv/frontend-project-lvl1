@@ -1,27 +1,29 @@
 import {
   WIN_GAME, LOSE_GAME,
-  greetingUser, congratulationUser,
-} from '../index.js';
+  sendMessage, getUserName,
+} from './index.js';
 
-import brainCalc from './game-calc.js';
-import brainEven from './game-even.js';
-import brainGcd from './game-gcd.js';
-import brainPrime from './game-prime.js';
-import brainProgression from './game-progression.js';
+import brainCalc from './games/game-calc.js';
+import brainEven from './games/game-even.js';
+import brainGcd from './games/game-gcd.js';
+import brainPrime from './games/game-prime.js';
+import brainProgression from './games/game-progression.js';
 
 // --------------------------------------------------
 // Точка входа в игры
 // --------------------------------------------------
 
-const gameBrain = (typeGame) => {
+const brainGames = (typeGame) => {
   let result = LOSE_GAME;
 
   // Задаем максимальное значение для величин,
   // используемых в играх.
   const maxRandomNumber = 100;
 
-  // Приветствуем игрока и получаем его имя.
-  const userName = greetingUser();
+  // Получаем имя пользоватя и приветствуем игрока.
+  sendMessage('Welcome to the Brain Games!');
+  const userName = getUserName();
+  sendMessage(`Hello, ${userName}!`);
 
   // Запускаем указанную игру.
   switch (typeGame) {
@@ -45,10 +47,10 @@ const gameBrain = (typeGame) => {
 
   // Если игрок победил, выводим поздравление.
   if (result === WIN_GAME) {
-    congratulationUser(userName);
+    sendMessage(`Congratulations, ${userName}!`);
   }
 
   return result;
 };
 
-export default gameBrain;
+export default brainGames;

@@ -13,40 +13,27 @@ const LOSE_GAME = -1; // поражение пользователя
 // Функции диалога с пользователем
 // --------------------------------------------------
 
+// Запрашивает и возвращает имя пользователя.
+const getUserName = (requestName = 'May I have your name? ') => readlineSync.question(requestName);
+
 // Выводит сообщение для пользователя.
 const sendMessage = (message) => console.log(message);
 
 // Возвращает ответ пользователя.
 const getAnswer = (message = 'Your answer: ') => readlineSync.question(message);
 
-// Запрашивает и возвращает имя пользователя.
-const getUserName = (requestName = 'May I have your name? ') => readlineSync.question(requestName);
-
-// Привествует пользователя и возвращает его имя.
-const greetingUser = () => {
-  sendMessage('Welcome to the Brain Games!');
-
-  const userName = getUserName();
-  sendMessage(`Hello, ${userName}!`);
-
-  return userName;
-};
-
 // Выводит сообщение об ошибке.
 const sendWrongMessage = (correctAnswer, userAnswer, userName) => {
   sendMessage(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}".\nLet's try again, ${userName}!`);
 };
-
-// Выводит поздравление пользователя с победой.
-const congratulationUser = (userName) => sendMessage(`Congratulations, ${userName}!`);
 
 
 // --------------------------------------------------
 // Функции обработки ввода пользователя
 // --------------------------------------------------
 
-// Приводи input в соотвтетствие с 'yes' или 'no'.
-// Если привести input не удается, возвращает null.
+// Приводит input к 'yes' или 'no'.
+// Если привести input к нужному виду не удается, возвращает null.
 const inputToYesNo = (input) => {
   const setAnswers = ['yes', 'no'];
 
@@ -57,8 +44,8 @@ const inputToYesNo = (input) => {
   return null;
 };
 
-// Если input нельзя привести к числу, возвращает null,
-// иначе возвращает число, соответствующее input.
+// Приводит input к числу.
+// Если привести input к числу не удается, возвращает null.
 const inputToInt = (input) => {
   const inputNumber = parseInt(input, 10);
 
@@ -157,7 +144,7 @@ const isPrime = (number) => {
 
 export {
   WIN_GAME, LOSE_GAME,
-  sendMessage, getAnswer, greetingUser, sendWrongMessage, congratulationUser,
+  sendMessage, getUserName, getAnswer, sendWrongMessage,
   getRandomNumber, getRandomOperation, calcExpression, isEven, getGcd, isPrime,
   inputToYesNo, inputToInt, isCorrectAnswer,
 };

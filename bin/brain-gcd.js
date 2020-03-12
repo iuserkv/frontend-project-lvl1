@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import gameBrain from '../src/games/game-brain.js';
+import brainGames from '../src/brain-games.js';
 
-gameBrain('gcd'); // Запускаем игру "Brain gcd"
+brainGames('gcd'); // Запускаем игру "Brain gcd"

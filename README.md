@@ -5,16 +5,16 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
 
 # Brain Even
-[![asciicast](https://asciinema.org/a/sMKU0AYt4osoqtj0G8eeIbMu5.png)](https://asciinema.org/a/sMKU0AYt4osoqtj0G8eeIbMu5)
+[![asciicast](https://asciinema.org/a/UZD6Od7tAgA6eiGeWvk9tPzw6.png)](https://asciinema.org/a/UZD6Od7tAgA6eiGeWvk9tPzw6)
 
 # Brain Calc
-[![asciicast](https://asciinema.org/a/IaXxQqU0dr2y9NBOF2uCCy3Ow.png)](https://asciinema.org/a/IaXxQqU0dr2y9NBOF2uCCy3Ow)
+[![asciicast](https://asciinema.org/a/uHv6zFm0wFxMNqibapCqbucmL.png)](https://asciinema.org/a/uHv6zFm0wFxMNqibapCqbucmL)
 
 # Brain GCD
-[![asciicast](https://asciinema.org/a/nFrrNpNwI9RdzcNaSj6ECW4TH.png)](https://asciinema.org/a/nFrrNpNwI9RdzcNaSj6ECW4TH)
+[![asciicast](https://asciinema.org/a/z4xqprj8aKnxrHi7XUHkHkETz.png)](https://asciinema.org/a/z4xqprj8aKnxrHi7XUHkHkETz)
 
 # Brain Progression
-[![asciicast](https://asciinema.org/a/lPJ66lkJyVMpEXyh3LFjoFjKY.png)](https://asciinema.org/a/lPJ66lkJyVMpEXyh3LFjoFjKY)
+[![asciicast](https://asciinema.org/a/8DPfoTOA8Gf53DJqIMS85Jw2O.png)](https://asciinema.org/a/8DPfoTOA8Gf53DJqIMS85Jw2O)
 
 # Brain Prime
-[![asciicast](https://asciinema.org/a/Qd9cQq29xkq5S30xZQ68Rs8ha.png)](https://asciinema.org/a/Qd9cQq29xkq5S30xZQ68Rs8ha)
+[![asciicast](https://asciinema.org/a/OSqgxPhQcP7RynFlk8eQm7IzJ.png)](https://asciinema.org/a/OSqgxPhQcP7RynFlk8eQm7IzJ)
