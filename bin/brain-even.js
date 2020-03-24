@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
-import brainGames from '../src/brain-games.js';
+import brainEven from '../src/games/game-even.js';
 
-brainGames('even'); // Запускаем игру "Brain even"
+// Запускаем игру "Brain even".
+brainEven();

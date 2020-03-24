@@ -2,14 +2,6 @@ import readlineSync from 'readline-sync';
 
 
 // --------------------------------------------------
-// Описание сосотяния игры
-// --------------------------------------------------
-
-const WIN_GAME = 0; // победа пользователя
-const LOSE_GAME = -1; // поражение пользователя
-
-
-// --------------------------------------------------
 // Функции диалога с пользователем
 // --------------------------------------------------
 
@@ -56,6 +48,14 @@ const inputToInt = (input) => {
   return inputNumber;
 };
 
+
+// --------------------------------------------------
+// Вспомогательные функции для реализации игр
+// --------------------------------------------------
+
+// Возвращает случайное целое число в диапазоне от 0 до maxNumber.
+const getRandomNumber = (maxNumber) => Math.round((Math.random() * maxNumber));
+
 // Проверяет ответ пользователя.
 // Возвращает true если userAnswer и correctAnswer совпадают,
 // иначе возвращает false.
@@ -73,78 +73,7 @@ const isCorrectAnswer = (correctAnswer, userAnswer) => {
   return false;
 };
 
-
-// --------------------------------------------------
-// Вспомогательные функции для реализации игр
-// --------------------------------------------------
-
-// Возвращает случайное целое число в диапазоне от 0 до maxNumber.
-const getRandomNumber = (maxNumber) => Math.round((Math.random() * maxNumber));
-
-// Возвращает случайным образом одну из операций: +, -, *.
-const getRandomOperation = () => {
-  const setOperations = ['+', '-', '*'];
-  const randomOperation = setOperations[getRandomNumber(2)];
-
-  return randomOperation;
-};
-
-// Вычисляет заданное выражение и возвращет его результат.
-// number1, number2 - операнды; operation - операция.
-const calcExpression = (number1, number2, operation) => {
-  if (operation === '+') {
-    return number1 + number2;
-  }
-
-  if (operation === '-') {
-    return number1 - number2;
-  }
-
-  if (operation === '*') {
-    return number1 * number2;
-  }
-
-  return null;
-};
-
-// Возвращает true, если number четное, иначе, false.
-const isEven = (number) => number % 2 === 0;
-
-// Возвращает наибольший общий делитель чисел number1 и number2.
-const getGcd = (number1, number2) => {
-  let num1 = number1;
-  let num2 = number2;
-
-  while (num1 !== num2) {
-    if (num1 > num2) {
-      num1 -= num2;
-    } else {
-      num2 -= num1;
-    }
-  }
-
-  return num1;
-};
-
-// Если number простое число, возвращает true, иначе false.
-const isPrime = (number) => {
-  if (number <= 1) {
-    return false;
-  }
-
-  // Если число делится без остатка на i, то данное число не простое.
-  for (let i = 2; i < number; i += 1) {
-    if (number % i === 0) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
 export {
-  WIN_GAME, LOSE_GAME,
   sendMessage, getUserName, getAnswer, sendWrongMessage,
-  getRandomNumber, getRandomOperation, calcExpression, isEven, getGcd, isPrime,
-  inputToYesNo, inputToInt, isCorrectAnswer,
+  getRandomNumber, inputToYesNo, inputToInt, isCorrectAnswer,
 };

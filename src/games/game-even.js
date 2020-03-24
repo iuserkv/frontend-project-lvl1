@@ -1,40 +1,33 @@
-import {
-  WIN_GAME, LOSE_GAME,
-  sendMessage, getAnswer, inputToYesNo, sendWrongMessage,
-  getRandomNumber, isEven,
-  isCorrectAnswer,
-} from '../index.js';
+import { getRandomNumber } from '../index.js';
+import { countRounds, maxRandomNumber, gameEngine } from '../game-engine.js';
+
+
+// --------------------------------------------------
+// Вспомогательные функции
+// --------------------------------------------------
+
+// Возвращает true, если number четное, иначе, false.
+const isEven = (number) => number % 2 === 0;
+
 
 // --------------------------------------------------
 // Игра "Brain even"
 // --------------------------------------------------
 
-const brainEven = (userName, maxRandomNumber) => {
-  // Начинаем игру.
-  sendMessage('Answer "yes" if the number is even, otherwise answer "no".');
-
-  // Даем игроку три попытки ответить.
-  for (let i = 0; i < 3; i += 1) {
-    // Гененерируем случайное целое число в заданном диапазоне.
+const brainEven = () => {
+  const typeOfGame = 'even';
+  // Формируем данные для 3-х раундов.
+  const rounds = [];
+  for (let i = 0; i < countRounds; i += 1) {
     const randomNumber = getRandomNumber(maxRandomNumber);
-    sendMessage(`Question: ${randomNumber}`);
-
-    // Запрашиваем ответ игрока.
-    const userAnswer = inputToYesNo(getAnswer());
     const correctAnswer = isEven(randomNumber) ? 'yes' : 'no';
+    const round = [randomNumber, correctAnswer];
 
-    // Если ответ неверный, завершаем игру.
-    if (!isCorrectAnswer(correctAnswer, userAnswer)) {
-      sendWrongMessage(correctAnswer, userAnswer, userName);
-
-      return LOSE_GAME;
-    }
-
-    // Если ответ верный, продолжаем.
-    sendMessage('Correct!');
+    rounds.push(round);
   }
 
-  return WIN_GAME;
+  // Запускаем движок.
+  gameEngine(typeOfGame, rounds);
 };
 
 export default brainEven;

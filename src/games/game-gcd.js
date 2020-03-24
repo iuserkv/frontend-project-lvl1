@@ -1,41 +1,47 @@
-import {
-  WIN_GAME, LOSE_GAME,
-  sendMessage, getAnswer, inputToInt, sendWrongMessage,
-  getRandomNumber, getGcd,
-  isCorrectAnswer,
-} from '../index.js';
+import { getRandomNumber } from '../index.js';
+import { countRounds, maxRandomNumber, gameEngine } from '../game-engine.js';
+
+
+// --------------------------------------------------
+// Вспомогательные функции
+// --------------------------------------------------
+
+// Возвращает наибольший общий делитель чисел number1 и number2.
+const getGcd = (number1, number2) => {
+  let num1 = number1;
+  let num2 = number2;
+
+  while (num1 !== num2) {
+    if (num1 > num2) {
+      num1 -= num2;
+    } else {
+      num2 -= num1;
+    }
+  }
+
+  return num1;
+};
+
 
 // --------------------------------------------------
 // Игра "Brain gcd"
 // --------------------------------------------------
 
-const brainGcd = (userName, maxRandomNumber) => {
-  // Начинаем игру.
-  sendMessage('Find the greatest common divisor of given numbers.');
-
-  // Даем игроку три попытки ответить.
-  for (let i = 0; i < 3; i += 1) {
-    // Получаем два случайных числа.
+const brainGcd = () => {
+  const typeOfGame = 'gcd';
+  // Формируем данные для 3-х раундов.
+  const rounds = [];
+  for (let i = 0; i < countRounds; i += 1) {
     const number1 = getRandomNumber(maxRandomNumber);
     const number2 = getRandomNumber(maxRandomNumber);
-    sendMessage(`Question: ${number1} ${number2}`);
-
-    // Запрашиваем отет игрока.
-    const userAnswer = inputToInt(getAnswer());
     const correctAnswer = getGcd(number1, number2);
+    const round = [number1, number2, correctAnswer];
 
-    // Если ответ неверный, сообщаем об это и завершаем игру.
-    if (!isCorrectAnswer(correctAnswer, userAnswer)) {
-      sendWrongMessage(correctAnswer, userAnswer, userName);
-
-      return LOSE_GAME;
-    }
-
-    // Если ответ верный, продолжаем.
-    sendMessage('Correct!');
+    rounds.push(round);
   }
 
-  return WIN_GAME;
+  // Запускаем движок.
+  gameEngine(typeOfGame, rounds);
 };
 
 export default brainGcd;
