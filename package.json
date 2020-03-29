@@ -1,7 +1,11 @@
 {
   "name": "frontend-project-lvl1-kv",
   "version": "1.0.0",
-  "description": "",
+  "description": "A set of mathematical games 'Brain Games'.",
+  "keywords": [
+    "games",
+    "mathematical games"
+  ],
   "main": "src/index.js",
   "type": "module",
   "bin": {
