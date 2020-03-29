@@ -1,4 +1,6 @@
 install:
+	npm install eslint-config-airbnb-base
+	npm install eslint-plugin-import
 	npm install
 
 lint:
