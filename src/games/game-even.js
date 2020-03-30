@@ -1,5 +1,5 @@
 import { getRandomNumber } from '../index.js';
-import { countRounds, maxRandomNumber, gameEngine } from '../game-engine.js';
+import { countRounds, gameEngine } from '../game-engine.js';
 
 
 // --------------------------------------------------
@@ -14,20 +14,24 @@ const isEven = (number) => number % 2 === 0;
 // Игра "Brain even"
 // --------------------------------------------------
 
-const brainEven = () => {
-  const typeOfGame = 'even';
-  // Формируем данные для 3-х раундов.
-  const rounds = [];
-  for (let i = 0; i < countRounds; i += 1) {
-    const randomNumber = getRandomNumber(maxRandomNumber);
-    const correctAnswer = isEven(randomNumber) ? 'yes' : 'no';
-    const round = [randomNumber, correctAnswer];
+const startBrainEven = () => {
+  const maxRandomNumber = 100;
 
-    rounds.push(round);
+  const parameters = {
+    description: 'Answer "yes" if the number is even, otherwise answer "no".',
+    rounds: [],
+  };
+
+  for (let i = 0; i < countRounds; i += 1) {
+    const randomNumber = getRandomNumber(0, maxRandomNumber);
+    const question = `Question: ${randomNumber}`;
+    const correctAnswer = isEven(randomNumber) ? 'yes' : 'no';
+    const round = { question, correctAnswer };
+
+    parameters.rounds.push(round);
   }
 
-  // Запускаем движок.
-  gameEngine(typeOfGame, rounds);
+  gameEngine(parameters);
 };
 
-export default brainEven;
+export default startBrainEven;
