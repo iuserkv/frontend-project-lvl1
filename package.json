@@ -29,7 +29,6 @@
   },
   "homepage": "https://github.com/iuserkv/frontend-project-lvl1#readme",
   "dependencies": {
-    "link": "^0.1.5",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {

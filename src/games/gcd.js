@@ -1,6 +1,5 @@
-import { getRandomNumber } from '../index.js';
-import { countRounds, gameEngine } from '../game-engine.js';
-
+import { getRandomNumber } from '../utils.js';
+import { roundsCount, gameEngine } from '../game-engine.js';
 
 // --------------------------------------------------
 // Вспомогательные функции
@@ -22,7 +21,6 @@ const getGcd = (number1, number2) => {
   return num1;
 };
 
-
 // --------------------------------------------------
 // Игра "Brain GCD"
 // --------------------------------------------------
@@ -30,22 +28,20 @@ const getGcd = (number1, number2) => {
 const startBrainGcd = () => {
   const maxRandomNumber = 100;
 
-  const parameters = {
-    description: 'Find the greatest common divisor of given numbers.',
-    rounds: [],
-  };
+  const description = 'Find the greatest common divisor of given numbers.';
+  const rounds = [];
 
-  for (let i = 0; i < countRounds; i += 1) {
+  for (let i = 0; i < roundsCount; i += 1) {
     const number1 = getRandomNumber(0, maxRandomNumber);
     const number2 = getRandomNumber(0, maxRandomNumber);
-    const question = `Question: ${number1} ${number2}`;
+    const question = `${number1} ${number2}`;
     const correctAnswer = getGcd(number1, number2);
     const round = { question, correctAnswer };
 
-    parameters.rounds.push(round);
+    rounds.push(round);
   }
 
-  gameEngine(parameters);
+  gameEngine(description, rounds);
 };
 
 export default startBrainGcd;

@@ -1,6 +1,5 @@
-import { getRandomNumber } from '../index.js';
-import { countRounds, gameEngine } from '../game-engine.js';
-
+import { getRandomNumber } from '../utils.js';
+import { roundsCount, gameEngine } from '../game-engine.js';
 
 // --------------------------------------------------
 // Вспомогательные функции
@@ -12,7 +11,7 @@ const isPrime = (number) => {
     return false;
   }
 
-  for (let i = 2; i < number; i += 1) {
+  for (let i = 2; i < number / 2; i += 1) {
     if (number % i === 0) {
       return false;
     }
@@ -21,7 +20,6 @@ const isPrime = (number) => {
   return true;
 };
 
-
 // --------------------------------------------------
 // Игра "Brain prime"
 // --------------------------------------------------
@@ -29,21 +27,19 @@ const isPrime = (number) => {
 const startBrainPrime = () => {
   const maxRandomNumber = 100;
 
-  const parameters = {
-    description: 'Answer "yes" if given number is prime. Otherwise answer "no".',
-    rounds: [],
-  };
+  const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+  const rounds = [];
 
-  for (let i = 0; i < countRounds; i += 1) {
+  for (let i = 0; i < roundsCount; i += 1) {
     const randomNumber = getRandomNumber(0, maxRandomNumber);
-    const question = `Question: ${randomNumber}`;
+    const question = `${randomNumber}`;
     const correctAnswer = isPrime(randomNumber) ? 'yes' : 'no';
     const round = { question, correctAnswer };
 
-    parameters.rounds.push(round);
+    rounds.push(round);
   }
 
-  gameEngine(parameters);
+  gameEngine(description, rounds);
 };
 
 export default startBrainPrime;

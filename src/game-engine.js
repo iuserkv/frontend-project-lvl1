@@ -1,32 +1,29 @@
 import readlineSync from 'readline-sync';
-import { inputToNormal, isCorrectAnswer } from './index.js';
-
+import { inputToNormal } from './utils.js';
 
 // --------------------------------------------------
 // Движок игр
 // --------------------------------------------------
 
-const countRounds = 3; // число раундов для всех игр
+const roundsCount = 3; // число раундов для всех игр
 
-const gameEngine = (parameters) => {
+const gameEngine = (description, rounds) => {
   console.log('Welcome to the Brain Games!');
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!`);
 
-  let userAnswer = null;
-  let correctAnswer = null;
-
   // Начинаем серию раундов.
-  console.log(parameters);
-  for (let i = 0; i < countRounds; i += 1) {
-    console.log(parameters.description);
-    console.log(parameters.rounds[i].question);
-    userAnswer = inputToNormal(readlineSync.question('Your answer: ')); // преобразуем ответ к стандартному виду
-    correctAnswer = parameters.rounds[i].correctAnswer;
+  for (let i = 0; i < roundsCount; i += 1) {
+    const { question, correctAnswer } = rounds[i];
+
+    console.log(description);
+    console.log(`Question: ${question}`);
+    const userAnswer = inputToNormal(readlineSync.question('Your answer: ')); // преобразуем ответ к стандартному виду
 
     // При неверном ответе завершаем игру.
-    if (!isCorrectAnswer(userAnswer, correctAnswer)) {
-      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}".\nLet's try again, ${userName}!`);
+    if (userAnswer !== correctAnswer) {
+      console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${correctAnswer}".`);
+      console.log(`Let's try again, ${userName}!`);
       return;
     }
 
@@ -37,4 +34,4 @@ const gameEngine = (parameters) => {
   console.log(`Congratulations, ${userName}!`);
 };
 
-export { countRounds, gameEngine };
+export { roundsCount, gameEngine };
