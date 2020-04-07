@@ -6,7 +6,7 @@
     "games",
     "mathematical games"
   ],
-  "main": "src/index.js",
+  "main": "",
   "type": "module",
   "bin": {
     "brain-even": "bin/brain-even.js",
